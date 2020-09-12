@@ -1,3 +1,27 @@
 from django.test import TestCase
+from django.contrib.auth.models import User
 
-# Create your tests here.
+from .models import Car
+
+
+class CarTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        # Create a user
+        testuser1 = User.objects.create_user(username="testuser1", password="abc123")
+        testuser1.save()
+
+        # Create a car
+        test_car = Car.objects.create(
+            owner="lee", make="Ford", model="Mustang", doors=3, price=800
+        )
+        test_post.save()
+
+    def test_car_content(self):
+        car = Post.objects.get(id=1)
+        actual_owner = f"{car.author}"
+        actual_make = f"{car.title}"
+        actual_model = f"{car.body}"
+        self.assertEqual(actual_make, "Ford")
+        self.assertEqual(actual_owner, "testuser1")
+        self.assertEqual(actual_model, "Mustang")
